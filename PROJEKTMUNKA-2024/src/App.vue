@@ -1,5 +1,4 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -32,6 +31,18 @@ import HelloWorld from './components/HelloWorld.vue'
       </div>
     </div>
   </nav>
+  <div class="container my-4">
+    <div class="row g-4">
+      <div class="col-md-4" v-for="recipe in recipes" :key="recipe.id">
+        <RecipeCard
+          :title="recipe.title"
+          :description="recipe.description"
+          :category="recipe.category"
+          :imageSrc="recipe.imageSrc"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -42,4 +53,5 @@ import HelloWorld from './components/HelloWorld.vue'
 .nav-item .nav-link {
   text-transform: capitalize;
 }
+
 </style>
