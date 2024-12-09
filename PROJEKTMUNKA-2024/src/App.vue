@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -35,10 +36,10 @@
     <div class="row g-4">
       <div class="col-md-4" v-for="recipe in recipes" :key="recipe.id">
         <RecipeCard
-          :title="recipe.title"
-          :description="recipe.description"
-          :category="recipe.category"
-          :imageSrc="recipe.imageSrc"
+          :title="recipe.name"
+          :description="'Elkészítési idő: ' + recipe.cookTime + ' perc'"
+          :category="'Nehézségi szint: ' + recipe.difficulty"
+          :imageSrc="recipe.imageUrl"
         />
       </div>
     </div>
