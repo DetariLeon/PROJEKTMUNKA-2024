@@ -1,6 +1,20 @@
 <script setup>
+import { ref, computed } from 'vue';
 import RecipeCard from './components/RecipeCard.vue';
 import { recipes } from './assets/dummyData';
+
+const searchQuery = ref('');
+const selectedDifficulty = ref('');
+const selectedCookTime = ref('');
+
+const filteredRecipes = computed(() => {
+  return recipes.filter((recipe) => {
+    const matchesSearch = recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+    
+
+    return matchesSearch;
+  });
+});
 </script>
 
 <template>
@@ -27,15 +41,16 @@ import { recipes } from './assets/dummyData';
       </div>
     </div>
   </nav>
+
   <div class="container my-3">
     <form class="row">
       <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="Keresés recept név alapján..." />
+        <input type="text" class="form-control" placeholder="Keress receptet..." v-model="searchQuery" />
       </div>
 
       <div class="col-md-3">
-        <select class="form-select">
-          <option selected>Nehézségi szint</option>
+        <select class="form-select" v-model="selectedDifficulty">
+          <option value="">Minden nehézség</option>
           <option value="könnyű">Könnyű</option>
           <option value="közepes">Közepes</option>
           <option value="nehéz">Nehéz</option>
@@ -43,8 +58,8 @@ import { recipes } from './assets/dummyData';
       </div>
 
       <div class="col-md-3">
-        <select class="form-select">
-          <option selected>Elkészítési idő</option>
+        <select class="form-select" v-model="selectedCookTime">
+          <option value="">Elkészítési idő szerint</option>
           <option value="30">30 perc alatt</option>
           <option value="60">60 perc alatt</option>
           <option value="90">90 perc alatt</option>
@@ -53,9 +68,10 @@ import { recipes } from './assets/dummyData';
       </div>
     </form>
   </div>
+
   <div class="container my-4">
     <div class="row g-4">
-      <div class="col-md-4" v-for="recipe in recipes" :key="recipe.id">
+      <div class="col-md-4" v-for="recipe in filteredRecipes" :key="recipe.id">
         <RecipeCard :title="recipe.name" :description="'Elkészítési idő: ' + recipe.cookTime + ' perc'"
           :category="'Nehézségi szint: ' + recipe.difficulty" :imageSrc="recipe.imageUrl" />
       </div>
