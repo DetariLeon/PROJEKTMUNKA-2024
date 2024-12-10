@@ -1,6 +1,21 @@
 <script setup>
-import RecipeCard from './components/RecipeCard.vue';
+import { ref, computed } from 'vue';
 import { recipes } from './assets/dummyData';
+
+const searchQuery = ref('');
+const selectedDifficulty = ref('');
+const selectedCookTime = ref('');
+
+const filteredRecipes = computed(() => {
+  return recipes.filter((recipe) => {
+    const matchesSearch = recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+
+    const matchesDifficulty = selectedDifficulty.value ? recipe.difficulty === selectedDifficulty.value : true;
+    const matchesCookTime = selectedCookTime.value ? recipe.cookTime <= selectedCookTime.value : true;
+
+    return matchesSearch && matchesDifficulty && matchesCookTime;
+  });
+});
 </script>
 
 <template>
@@ -30,12 +45,12 @@ import { recipes } from './assets/dummyData';
   <div class="container my-3">
     <form class="row">
       <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="Keresés recept név alapján..." />
+        <input type="text" class="form-control" placeholder="Keresés recept név alapján..." v-model="searchQuery" />
       </div>
 
       <div class="col-md-3">
-        <select class="form-select">
-          <option selected>Nehézségi szint</option>
+        <select class="form-select" v-model="selectedDifficulty">
+          <option value="">Nehézségi szint</option>
           <option value="könnyű">Könnyű</option>
           <option value="közepes">Közepes</option>
           <option value="nehéz">Nehéz</option>
@@ -43,8 +58,8 @@ import { recipes } from './assets/dummyData';
       </div>
 
       <div class="col-md-3">
-        <select class="form-select">
-          <option selected>Elkészítési idő</option>
+        <select class="form-select" v-model="selectedCookTime">
+          <option value="">Elkészítési idő</option>
           <option value="30">30 perc alatt</option>
           <option value="60">60 perc alatt</option>
           <option value="90">90 perc alatt</option>
@@ -55,22 +70,20 @@ import { recipes } from './assets/dummyData';
   </div>
   <div class="container my-4">
     <div class="row g-4">
-      <div class="col-md-4" v-for="recipe in recipes" :key="recipe.id">
+      <div class="col-md-4" v-for="recipe in filteredRecipes" :key="recipe.id">
         <div class="card h-100">
-          <img :src="recipe.imageUrl" class="card-img-top" alt="recipe.name" style="height: 200px; object-fit: cover;" />
+          <img :src="recipe.imageUrl" class="card-img-top" alt="recipe.name"
+            style="height: 200px; object-fit: cover;" />
           <div class="card-body">
             <h5 class="card-title">{{ recipe.name }}</h5>
             <p class="card-text">
               Elkészítési idő: {{ recipe.cookTime }} perc
             </p>
-            <p
-              class="card-text"
-              :class="{
-                'text-success': recipe.difficulty === 'könnyű',
-                'text-warning': recipe.difficulty === 'közepes',
-                'text-danger': recipe.difficulty === 'nehéz',
-              }"
-            >
+            <p class="card-text" :class="{
+              'text-success': recipe.difficulty === 'könnyű',
+              'text-warning': recipe.difficulty === 'közepes',
+              'text-danger': recipe.difficulty === 'nehéz',
+            }">
               Nehézségi szint: {{ recipe.difficulty }}
             </p>
             <button class="btn btn-primary">Részletek</button>
