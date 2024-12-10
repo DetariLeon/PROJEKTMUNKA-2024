@@ -7,17 +7,11 @@ import { recipes } from './assets/dummyData';
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand" href="#">Receptkönyv</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -33,15 +27,37 @@ import { recipes } from './assets/dummyData';
       </div>
     </div>
   </nav>
+  <div class="container my-3">
+    <form class="row">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Keresés recept név alapján..." />
+      </div>
+
+      <div class="col-md-3">
+        <select class="form-select">
+          <option selected>Nehézségi szint</option>
+          <option value="könnyű">Könnyű</option>
+          <option value="közepes">Közepes</option>
+          <option value="nehéz">Nehéz</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <select class="form-select">
+          <option selected>Elkészítési idő</option>
+          <option value="30">30 perc alatt</option>
+          <option value="60">60 perc alatt</option>
+          <option value="90">90 perc alatt</option>
+          <option value="120">120 perc alatt</option>
+        </select>
+      </div>
+    </form>
+  </div>
   <div class="container my-4">
     <div class="row g-4">
       <div class="col-md-4" v-for="recipe in recipes" :key="recipe.id">
-        <RecipeCard
-          :title="recipe.name"
-          :description="'Elkészítési idő: ' + recipe.cookTime + ' perc'"
-          :category="'Nehézségi szint: ' + recipe.difficulty"
-          :imageSrc="recipe.imageUrl"
-        />
+        <RecipeCard :title="recipe.name" :description="'Elkészítési idő: ' + recipe.cookTime + ' perc'"
+          :category="'Nehézségi szint: ' + recipe.difficulty" :imageSrc="recipe.imageUrl" />
       </div>
     </div>
   </div>
@@ -55,5 +71,4 @@ import { recipes } from './assets/dummyData';
 .nav-item .nav-link {
   text-transform: capitalize;
 }
-
 </style>
