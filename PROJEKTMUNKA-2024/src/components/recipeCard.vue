@@ -1,19 +1,21 @@
 <script setup>
-defineProps({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  category: { type: String, required: true },
-  imageSrc: { type: String, required: true },
-});
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  title: String,
+  description: String,
+  imageSrc: String,
+  category: String
+})
 </script>
 
 <template>
   <div class="card recipe-card">
     <img :src="imageSrc" :alt="title" class="card-img-top" />
     <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
-      <p class="card-text">{{ description }}</p>
-      <span class="badge bg-info text-dark">{{ category }}</span>
+      <h5 class="card-title">{{ props.title }}</h5>
+      <p class="card-text">{{ props.description }}</p>
+      <span class="badge bg-info text-dark">{{ props.category }}</span>
     </div>
   </div>
 </template>
