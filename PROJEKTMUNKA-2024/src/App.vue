@@ -1,5 +1,6 @@
 <script setup>
-
+import RecipeCard from './components/RecipeCard.vue';
+import { recipes } from './assets/dummyData';
 </script>
 
 <template>

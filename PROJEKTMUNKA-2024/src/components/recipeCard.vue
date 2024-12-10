@@ -1,4 +1,13 @@
-<script setup></script>
+
+<script setup>
+  defineProps({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    category: { type: String, required: true },
+    imageSrc: { type: String, required: true },
+  });
+  </script>
+
 <template>
     <div class="card recipe-card">
       <img :src="imageSrc" :alt="title" class="card-img-top" />
