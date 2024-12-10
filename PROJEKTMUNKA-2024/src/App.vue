@@ -10,9 +10,10 @@ const selectedCookTime = ref('');
 const filteredRecipes = computed(() => {
   return recipes.filter((recipe) => {
     const matchesSearch = recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-    
+    const matchesDifficulty = selectedDifficulty.value ? recipe.difficulty === selectedDifficulty.value : true;
+    const matchesCookTime = selectedCookTime.value ? recipe.cookTime <= selectedCookTime.value : true;
 
-    return matchesSearch;
+    return matchesSearch && matchesDifficulty && matchesCookTime;
   });
 });
 </script>
