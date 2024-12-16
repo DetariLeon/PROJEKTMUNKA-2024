@@ -32,7 +32,7 @@ const addNewRecipe = () => {
     name: newRecipeName.value,
     cookTime: parseInt(newRecipeCookTime.value),
     difficulty: newRecipeDifficulty.value,
-    imageUrl: '' // Az új receptekhez nem adunk képet
+    imageUrl: ''
   });
 
   newRecipeName.value = '';

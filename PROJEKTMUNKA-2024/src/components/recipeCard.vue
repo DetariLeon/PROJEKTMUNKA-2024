@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< Updated upstream
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -8,6 +9,16 @@ const props = defineProps({
   category: String
 })
 </script>
+=======
+
+defineProps({
+  title: String,
+  description: String,
+  category: String,
+  imageSrc: String,
+});
+  </script>
+>>>>>>> Stashed changes
 
 <template>
   <div class="card recipe-card">
@@ -17,6 +28,7 @@ const props = defineProps({
       <p class="card-text">{{ props.description }}</p>
       <span class="badge bg-info text-dark">{{ props.category }}</span>
     </div>
+<<<<<<< Updated upstream
   </div>
 </template>
 
@@ -37,3 +49,18 @@ const props = defineProps({
   object-fit: cover;
 }
 </style>
+=======
+  </template>
+  
+  <style scoped>
+  .recipe-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  </style>
+>>>>>>> Stashed changes
