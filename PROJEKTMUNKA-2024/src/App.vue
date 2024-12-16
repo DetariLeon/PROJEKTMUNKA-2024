@@ -28,11 +28,10 @@ const addNewRecipe = () => {
   }
 
   recipes.push({
-    id: Date.now(),
     name: newRecipeName.value,
     cookTime: parseInt(newRecipeCookTime.value),
     difficulty: newRecipeDifficulty.value,
-    imageUrl: ''
+
   });
 
   newRecipeName.value = '';
@@ -45,7 +44,7 @@ const addNewRecipe = () => {
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-      <a class="navbar-brand" href="#">Receptkönyv</a>
+      <a class="navbar-brand" href="/index.html">Receptkönyv</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -54,10 +53,12 @@ const addNewRecipe = () => {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" :class="{ active: activeTab === 'receptek' }" @click="activeTab = 'receptek'" href="#">Receptek</a>
+            <a class="nav-link active" :class="{ active: activeTab === 'receptek' }" @click="activeTab = 'receptek'"
+              href="#">Receptek</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" :class="{ active: activeTab === 'ujReceptek' }" @click="activeTab = 'ujReceptek'" href="#">Új recept</a>
+            <a class="nav-link" :class="{ active: activeTab === 'ujReceptek' }" @click="activeTab = 'ujReceptek'"
+              href="#">Új recept</a>
           </li>
         </ul>
       </div>
@@ -93,7 +94,7 @@ const addNewRecipe = () => {
     <div class="row g-4 mt-3">
       <div class="col-md-4" v-for="recipe in filteredRecipes" :key="recipe.id">
         <div class="card h-100">
-          <img :src="recipe.imageUrl" class="card-img-top" alt="recipe.name"
+          <img :src="recipe.imageUrl" class="card-img-top"
             style="height: 200px; object-fit: cover;" />
           <div class="card-body">
             <h5 class="card-title">{{ recipe.name }}</h5>
@@ -137,7 +138,7 @@ const addNewRecipe = () => {
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success">Hozzáadás</button>
+      <button type="submit" class="btn btn-primary">Hozzáadás</button>
     </form>
   </div>
 </template>
